@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import{HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { allBooks, allReaders } from 'app/data';
 import { Reader } from "app/models/reader";
 import { Book } from "app/models/book";
@@ -11,7 +11,7 @@ import { BookTrackerError } from 'app/models/bookTrackerError';
 })
 export class DataService {
 
-  constructor(private http : HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   mostPopularBook: Book = allBooks[0];
 
@@ -27,12 +27,19 @@ export class DataService {
     return allReaders.find(reader => reader.readerID === id);
   }
 
-  getAllBooks(): Observable <Book []>{
+  //Retriving a Collection
+  getAllBooks(): Observable<Book[]> {
     console.log('Getting sll books from the server.');
-    return this.http.get<Book []>('/api/books');
+    return this.http.get<Book[]>('/api/books');
   }
 
-  getBookById(id: number): Book {
-    return allBooks.find(book => book.bookID === id);
-  }  
+  //Retrvieving a Single Item
+  getBookById(id: number): Observable<Book> {
+    return this.http.get<Book>(`/api/books/${id}`, {
+      headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'Authorization': 'my-token'
+      })
+    });
+  }
 }

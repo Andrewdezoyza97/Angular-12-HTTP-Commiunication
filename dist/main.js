@@ -359,12 +359,19 @@ let DataService = class DataService {
     getReaderById(id) {
         return app_data__WEBPACK_IMPORTED_MODULE_0__.allReaders.find(reader => reader.readerID === id);
     }
+    //Retriving a Collection
     getAllBooks() {
         console.log('Getting sll books from the server.');
         return this.http.get('/api/books');
     }
+    //Retrvieving a Single Item
     getBookById(id) {
-        return app_data__WEBPACK_IMPORTED_MODULE_0__.allBooks.find(book => book.bookID === id);
+        return this.http.get(`/api/books/${id}`, {
+            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
+                'Accept': 'application/json',
+                'Authorization': 'my-token'
+            })
+        });
     }
 };
 DataService.ctorParameters = () => [
@@ -407,7 +414,8 @@ let DashboardComponent = class DashboardComponent {
         this.title = title;
     }
     ngOnInit() {
-        this.dataService.getAllBooks();
+        this.dataService.getAllBooks()
+            .subscribe((data) => this.allBooks = data, (err) => console.log(err), () => console.log('All done Getting Books.'));
         this.allReaders = this.dataService.getAllReaders();
         this.mostPopularBook = this.dataService.mostPopularBook;
         this.title.setTitle(`Book Tracker`);
@@ -491,7 +499,8 @@ let EditBookComponent = class EditBookComponent {
     }
     ngOnInit() {
         let bookID = parseInt(this.route.snapshot.params['id']);
-        this.selectedBook = this.dataService.getBookById(bookID);
+        this.dataService.getBookById(bookID)
+            .subscribe((data) => this.selectedBook = data, (err) => console.log(err));
     }
     setMostPopular() {
         this.dataService.setMostPopularBook(this.selectedBook);
