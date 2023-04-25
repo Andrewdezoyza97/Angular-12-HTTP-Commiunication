@@ -394,7 +394,7 @@ let DataService = class DataService {
     addBook(newBook) {
         return this.http.post('/api/books', newBook, {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
-                'Content-Type': 'aplication/json'
+                'Content-Type': 'application/json'
             })
         });
     }
@@ -402,7 +402,7 @@ let DataService = class DataService {
     updateBook(updatedBook) {
         return this.http.put(`/api/books/${updatedBook.bookID}`, updatedBook, {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__.HttpHeaders({
-                'Content-Type': 'aplication/json'
+                'Content-Type': 'application/json'
             })
         });
     }

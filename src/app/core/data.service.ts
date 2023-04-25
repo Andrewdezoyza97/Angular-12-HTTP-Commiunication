@@ -61,16 +61,16 @@ export class DataService {
   addBook(newBook: Book): Observable<Book> {
     return this.http.post<Book>('/api/books', newBook, {
       headers: new HttpHeaders({
-        'Content-Type': 'aplication/json'
+        'Content-Type' : 'application/json'
       })
     });
   }
 
   //Update
   updateBook(updatedBook: Book): Observable<void> {
-    return this.http.put<void>(`/api/books/${updatedBook.bookID}`, updatedBook, {
+    return this.http.put <void>(`/api/books/${updatedBook.bookID}`, updatedBook, {
       headers: new HttpHeaders({
-        'Content-Type': 'aplication/json'
+        'Content-Type': 'application/json'
       })
     });
   }
