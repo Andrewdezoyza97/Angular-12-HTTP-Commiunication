@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
-import {map , tap} from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { allBooks, allReaders } from 'app/data';
 import { Reader } from "app/models/reader";
@@ -46,14 +46,38 @@ export class DataService {
     });
   }
 
-  getOldBookById(id:number) : Observable<OldBook>{
+  getOldBookById(id: number): Observable<OldBook> {
     return this.http.get<Book>(`/api/books/${id}`)
-    .pipe(
-      map(b => <OldBook>{
-        bookTitle : b.title,
-        year: b.publicationYear
-      }),
-      tap(classicBook => console.log(classicBook))
-    );
+      .pipe(
+        map(b => <OldBook>{
+          bookTitle: b.title,
+          year: b.publicationYear
+        }),
+        tap(classicBook => console.log(classicBook))
+      );
   }
+
+  //Insert
+  addBook(newBook: Book): Observable<Book> {
+    return this.http.post<Book>('/api/books', newBook, {
+      headers: new HttpHeaders({
+        'Content-Type': 'aplication/json'
+      })
+    });
+  }
+
+  //Update
+  updateBook(updatedBook: Book): Observable<void> {
+    return this.http.put<void>(`/api/books/${updatedBook.bookID}`, updatedBook, {
+      headers: new HttpHeaders({
+        'Content-Type': 'aplication/json'
+      })
+    });
+  }
+
+  //Delete
+  deleteBook(bookID: number): Observable<void> {
+    return this.http.delete<void>(`/api/books/${bookID}`);
+  }
+
 }

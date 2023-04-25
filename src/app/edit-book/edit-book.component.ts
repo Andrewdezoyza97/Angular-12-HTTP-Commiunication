@@ -15,20 +15,20 @@ export class EditBookComponent implements OnInit {
   selectedBook: Book;
 
   constructor(private route: ActivatedRoute,
-              private dataService: DataService) { }
+    private dataService: DataService) { }
 
   ngOnInit() {
     let bookID: number = parseInt(this.route.snapshot.params['id']);
     this.dataService.getBookById(bookID)
-    .subscribe(
-      (data : Book) => this.selectedBook = data,
-      (err : any) => console.log(err)
-    );
+      .subscribe(
+        (data: Book) => this.selectedBook = data,
+        (err: any) => console.log(err)
+      );
 
     this.dataService.getOldBookById(bookID)
-    .subscribe(
-      (data:OldBook) => console.log(`Old Bok Title : ${data.bookTitle}`)
-    );
+      .subscribe(
+        (data: OldBook) => console.log(`Old Bok Title : ${data.bookTitle}`)
+      );
   }
 
   setMostPopular(): void {
@@ -36,6 +36,12 @@ export class EditBookComponent implements OnInit {
   }
 
   saveChanges(): void {
-    console.warn('Save changes to book not yet implemented.');
+    this.dataService.updateBook(this.selectedBook)
+      .subscribe(
+        (data: void) => console.log(`${this.selectedBook.title} Update Successfully. `),
+        (err: any) => console.log(err)
+      );
   }
+
 }
+
