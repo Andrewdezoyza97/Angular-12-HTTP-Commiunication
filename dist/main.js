@@ -126,7 +126,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var app_dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! app/dashboard/dashboard.component */ 7528);
 /* harmony import */ var app_edit_book_edit_book_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! app/edit-book/edit-book.component */ 445);
 /* harmony import */ var app_edit_reader_edit_reader_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! app/edit-reader/edit-reader.component */ 6236);
-/* harmony import */ var _core_books_resolver_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/books-resolver.service */ 349);
+/* harmony import */ var _core_books_resolver_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./core/books-resolver.service */ 5349);
 
 
 
@@ -335,7 +335,7 @@ BookTrackerErrorHandlerService = (0,tslib__WEBPACK_IMPORTED_MODULE_1__.__decorat
 
 /***/ }),
 
-/***/ 349:
+/***/ 5349:
 /*!************************************************!*\
   !*** ./src/app/core/books-resolver.service.ts ***!
   \************************************************/
@@ -346,16 +346,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "BooksResolverService": () => (/* binding */ BooksResolverService)
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 7716);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! tslib */ 4762);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 7716);
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs */ 5917);
+/* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./data.service */ 3943);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs/operators */ 5304);
 
 
 
-(0,_angular_core__WEBPACK_IMPORTED_MODULE_0__.Injectable)({
-    providedIn: 'root'
-});
-class BooksResolverService {
+
+
+let BooksResolverService = class BooksResolverService {
     constructor(dataService) {
         this.dataService = dataService;
     }
@@ -363,7 +364,16 @@ class BooksResolverService {
         return this.dataService.getAllBooks()
             .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_1__.catchError)(err => (0,rxjs__WEBPACK_IMPORTED_MODULE_2__.of)(err)));
     }
-}
+};
+BooksResolverService.ctorParameters = () => [
+    { type: _data_service__WEBPACK_IMPORTED_MODULE_0__.DataService }
+];
+BooksResolverService = (0,tslib__WEBPACK_IMPORTED_MODULE_3__.__decorate)([
+    (0,_angular_core__WEBPACK_IMPORTED_MODULE_4__.Injectable)({
+        providedIn: 'root'
+    })
+], BooksResolverService);
+
 
 
 /***/ }),

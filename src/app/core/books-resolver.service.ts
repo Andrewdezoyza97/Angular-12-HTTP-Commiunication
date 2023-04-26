@@ -8,7 +8,7 @@ import { BookTrackerError } from "app/models/bookTrackerError";
 import { catchError } from "rxjs/operators";
 
 
-Injectable({
+@Injectable({
     providedIn: 'root'
 })
 
