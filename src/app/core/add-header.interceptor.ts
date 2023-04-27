@@ -17,5 +17,4 @@ export class AddHeaderInterceptor implements HttpInterceptor {
 
         return next.handle(jsonReq);
     }
-
 }
