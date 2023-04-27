@@ -34,5 +34,11 @@
         "title": "test",
         "author": "test",
         "publicationYear": "test"
+    },
+    {
+        "bookID": 7,
+        "title": "Angular Book",
+        "author": "Plurslight",
+        "publicationYear": "2009"
     }
 ]
