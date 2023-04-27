@@ -1,16 +1,22 @@
-import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse } from "@angular/common/http";
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpContextToken } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
 import { tap } from "rxjs/operators";
 
 import { HttpCacheService } from "./http-cache.service";
 
+export const CACHEABLE =new HttpContextToken(() => true);
 @Injectable()
 
 export class CacheInterceptor implements HttpInterceptor {
 
     constructor(private casheService: HttpCacheService) { }
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+        //only cache request configured to be cacheable
+        if(!req.context.get(CACHEABLE)){
+            return next.handle(req);
+        }
 
         //pass along non-cacheble request and invalidate cache
         if (req.method !== 'GET') {
